@@ -1,0 +1,122 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+}
+
+.circle {
+  position: absolute;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 50%;
+}
+
+.dot {
+  position: absolute;
+  background-color: black;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.form {
+  padding: 0.5vh;
+  border-radius: 0.5vh;
+  background-color: beige;
+  margin-top: auto;
+}
+
+.form-box {
+  padding: 1vh;
+  padding-left: 1.5vh;
+  padding-right: 1.5vh;
+  border: 0.1vh;
+  margin: 0.2vh;
+  vertical-align: bottom;
+  border-radius: 0.3vh;
+  background-color: aliceblue;
+  color: black;
+}
+
+.form-box::placeholder {
+  color: black;
+}
+
+.button-submit {
+  background-color: #00c000;
+}
+
+table {
+  width: 95%;
+  margin-bottom: auto;
+  background-color: beige;
+  border-radius: 0.5vh;
+  text-align: center;
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: separate;
+}
+
+.sticky-header {
+  top: 0;
+  position: sticky;
+  background-color: beige;
+}
+
+th {
+  padding: 1vh;
+  font-weight: 900;
+  border-bottom: 1px solid black;
+}
+
+td {
+  padding: 0.75vh;
+  font-weight: 500;
+}
+
+tr:nth-child(even) {
+  background-color: bisque;
+}
+
+.button-delete {
+  border-width: 0px;
+  border-radius: 0.5vh;
+  padding: 1vh;
+  padding-left: 1.5vh;
+  padding-right: 1.5vh;
+  font-weight: bold;
+  background-color: #ff004f;
+}
+
+.instruction-body {
+  margin-left: 1vh;
+  padding-top: 0.5vh;
+}
+
+.instruction-body span {
+  background-color: white;
+  border: gray 1px solid;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.instruction-body div {
+  padding: 0.5vh;
+}
+
+.instruction {
+  background-color: beige;
+  padding: 1vh;
+  border-radius: 0.5vh;
+  position: absolute;
+  left: 1vh;
+  top: 1vh;
+}
+
+.instruction-head {
+  border-bottom: black 1px solid;
+  padding: 0.5vh;
+  font-weight: 600;
+}
