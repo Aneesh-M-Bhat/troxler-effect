@@ -9,11 +9,11 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, globalShortcut } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import MenuBuilder from './menu';
-import { resolvePath } from './util';
+// import MenuBuilder from './menu';
+import { resolvePath, toggleFullscreen } from './util';
 
 class AppUpdater {
   constructor() {
@@ -73,6 +73,7 @@ const createWindow = async () => {
     show: false,
     width: 1024,
     height: 728,
+    autoHideMenuBar: true,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       preload: app.isPackaged
@@ -98,8 +99,8 @@ const createWindow = async () => {
     mainWindow = null;
   });
 
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
+  // const menuBuilder = new MenuBuilder(mainWindow);
+  // menuBuilder.buildMenu();
 
   // Open urls in the user's browser
   mainWindow.webContents.setWindowOpenHandler((edata) => {
@@ -128,6 +129,15 @@ app
   .whenReady()
   .then(() => {
     createWindow();
+    globalShortcut.register('CmdOrCtrl+F', () => {
+      toggleFullscreen(mainWindow);
+    });
+    globalShortcut.register('CmdOrCtrl+H', () => {
+      resolvePath(mainWindow, 'main/history');
+    });
+    globalShortcut.register('CmdOrCtrl+G', () => {
+      resolvePath(mainWindow, 'main');
+    });
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
