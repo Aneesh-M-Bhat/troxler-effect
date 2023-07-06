@@ -1,6 +1,3 @@
-/* eslint import/prefer-default-export: off */
-import { URL } from 'url';
-import path from 'path';
 import { createFileRoute, createURLRoute } from 'electron-router-dom';
 import { join } from 'path';
 
@@ -22,5 +19,16 @@ export function resolvePath(mainWindow, id) {
     mainWindow.loadFile(
       ...createFileRoute(join(__dirname, '../renderer/index.html'), id)
     );
+  }
+}
+
+export function toggleFullscreen(mainWindow) {
+  if (mainWindow.isFullScreen()) {
+    mainWindow.setFullScreen(false);
+    // const menuBuilder = new MenuBuilder(mainWindow);
+    // menuBuilder.buildMenu();
+  } else {
+    mainWindow.setFullScreen(true);
+    mainWindow.setMenu(null);
   }
 }
