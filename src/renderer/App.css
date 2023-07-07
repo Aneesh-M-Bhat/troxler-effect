@@ -10,7 +10,7 @@
   border-style: solid;
   border-width: 2px;
   border-radius: 50%;
-  opacity: 25%;
+  /* opacity: 100%; */
 }
 
 .dot {
@@ -98,6 +98,16 @@ tbody tr:nth-child(odd) {
   padding-right: 1.5vh;
   font-weight: bold;
   background-color: #ff004f;
+}
+
+.export-button {
+  border-width: 0px;
+  border-radius: 0.5vh;
+  padding: 1vh;
+  padding-left: 1.5vh;
+  padding-right: 1.5vh;
+  font-weight: bold;
+  background-color: #00c000;
 }
 
 .instruction-body {

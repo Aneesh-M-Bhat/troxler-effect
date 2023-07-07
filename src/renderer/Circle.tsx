@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { borderColors3 } from './constants';
 
 export default function Circle({
   setStartTime,
@@ -8,102 +9,11 @@ export default function Circle({
   age,
   gender,
   name,
+  id,
 }) {
-  const borderColors = [
-    [
-      'rgb(255, 229, 225)',
-      'rgb(235, 247, 233)',
-      'rgb(255, 246, 225)',
-      'rgb(225, 246, 255)',
-    ],
-    [
-      'rgb(255, 211, 205)',
-      'rgb(221, 242, 218)',
-      'rgb(255, 240, 205)',
-      'rgb(205, 240, 255)',
-    ],
-    [
-      'rgb(255, 193, 185)',
-      'rgb(208, 237, 203)',
-      'rgb(255, 235, 185)',
-      'rgb(185, 235, 255)',
-    ],
-    [
-      'rgb(255, 176, 165)',
-      'rgb(194, 232, 188)',
-      'rgb(255, 229, 165)',
-      'rgb(165, 229, 255)',
-    ],
-    [
-      'rgb(255, 158, 145)',
-      'rgb(180, 226, 174)',
-      'rgb(255, 224, 145)',
-      'rgb(145, 224, 255)',
-    ],
-    [
-      'rgb(255, 132, 115)',
-      'rgb(153, 216, 144)',
-      'rgb(255, 215, 115)',
-      'rgb(115, 215, 255)',
-    ],
-    [
-      'rgb(255, 105, 85)',
-      'rgb(126, 204, 116)',
-      'rgb(255, 206, 85)',
-      'rgb(85, 206, 255)',
-    ],
-    [
-      'rgb(255, 79, 55)',
-      'rgb(99, 194, 86)',
-      'rgb(255, 198, 55)',
-      'rgb(55, 198, 255)',
-    ],
-    [
-      'rgb(255, 105, 85)',
-      'rgb(126, 204, 116)',
-      'rgb(255, 206, 85)',
-      'rgb(85, 206, 255)',
-    ],
-    [
-      'rgb(255, 132, 115)',
-      'rgb(153, 216, 144)',
-      'rgb(255, 215, 115)',
-      'rgb(115, 215, 255)',
-    ],
-    [
-      'rgb(255, 158, 145)',
-      'rgb(180, 226, 174)',
-      'rgb(255, 224, 145)',
-      'rgb(145, 224, 255)',
-    ],
-    [
-      'rgb(255, 176, 165)',
-      'rgb(194, 232, 188)',
-      'rgb(255, 229, 165)',
-      'rgb(165, 229, 255)',
-    ],
-    [
-      'rgb(255, 193, 185)',
-      'rgb(208, 237, 203)',
-      'rgb(255, 235, 185)',
-      'rgb(185, 235, 255)',
-    ],
-    [
-      'rgb(255, 211, 205)',
-      'rgb(221, 242, 218)',
-      'rgb(255, 240, 205)',
-      'rgb(205, 240, 255)',
-    ],
-    [
-      'rgb(255, 229, 225)',
-      'rgb(235, 247, 233)',
-      'rgb(255, 246, 225)',
-      'rgb(225, 246, 255)',
-    ],
-  ];
-
   const [data, setData] = useState([]);
   const [toast, setToast] = useState(0);
+  const [opacity, setOpacity] = useState(90);
 
   useEffect(() => {
     const storedData = localStorage.getItem('data');
@@ -141,13 +51,14 @@ export default function Circle({
         colorInWords = 'Blue';
         break;
     }
-    console.log(color, colorInWords);
     const newData = {
+      id: id,
       name: name,
       age: age,
       gender: gender,
       time: time + 's',
       color: colorInWords,
+      brightness: opacity == 90 ? 'High' : 'Low',
     };
     setData([...data, newData]);
   };
@@ -173,21 +84,30 @@ export default function Circle({
     if (event.key === '4') {
       setColor('3');
     }
+    if (event.key === 'ArrowUp') {
+      setOpacity(90);
+    }
+    if (event.key === 'ArrowDown') {
+      setOpacity(20);
+    }
   });
-
   return (
     <div className="container">
       <div className="dot"></div>
-      {[...new Array(45).keys()].map((i, index) => {
-        let reducedI = i / 3;
+      {[...new Array(borderColors3.length).keys()].map((i, index) => {
+        let reducedI = i;
         return (
           <div
             key={index}
             className="circle"
             style={{
-              borderColor: borderColors[Math.floor(reducedI % 15)][color],
+              borderColor:
+                borderColors3[Math.floor(reducedI % borderColors3.length)][
+                  color
+                ],
               width: 44 + i / 5 + 'vh',
               height: 44 + i / 5 + 'vh',
+              opacity: opacity + '%',
             }}
           ></div>
         );

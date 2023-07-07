@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { ExportData } from './Export';
 
 export default function History() {
   const [data, setData] = useState([]);
@@ -12,12 +13,11 @@ export default function History() {
 
   useEffect(() => {
     localStorage.setItem('data', JSON.stringify(data));
-    console.log(data);
   }, [data]);
 
   const deleteHandler = (index) => {
     const filteredData = data.filter((_, i) => index !== i);
-    setData(filteredData.reverse());
+    setData(filteredData);
   };
 
   return (
@@ -25,22 +25,28 @@ export default function History() {
       <table>
         <thead>
           <tr className="sticky-header">
+            <th>Id</th>
             <th>Name</th>
             <th>Age</th>
             <th>Gender</th>
             <th>Time</th>
             <th>Color</th>
-            <th></th>
+            <th>Brightness</th>
+            <th>
+              <ExportData csvData={data} />
+            </th>
           </tr>
         </thead>
         <tbody>
-          {data.reverse().map((item, index) => (
+          {data.map((item, index) => (
             <tr>
+              <td>{item.id}</td>
               <td>{item.name}</td>
               <td>{item.age}</td>
               <td>{item.gender}</td>
               <td>{item.time}</td>
               <td>{item.color}</td>
+              <td>{item.brightness}</td>
               <td>
                 <button
                   className="button-delete"

@@ -6,6 +6,8 @@ export default function Form({
   setAge,
   gender,
   setGender,
+  id,
+  setId,
 }) {
   const submitHandler = (event) => {
     event.preventDefault();
@@ -31,6 +33,14 @@ export default function Form({
               <span className="keys"> 1 to 4</span>
             </div>
             <div>
+              <span className="text">high brightness</span>
+              <span className="keys">up arrow</span>{' '}
+            </div>
+            <div>
+              <span className="text">low brightness</span>
+              <span className="keys">down arrow</span>{' '}
+            </div>
+            <div>
               <span className="text">toggle fullscreen</span>
               <span className="keys">ctrl+F</span>{' '}
             </div>
@@ -46,6 +56,13 @@ export default function Form({
         </div>
         <form onSubmit={submitHandler}>
           <div className="form-header">Enter the Details</div>
+          <input
+            className="form-box"
+            placeholder="Id"
+            type="string"
+            onChange={(event) => setId(event.target.value)}
+            value={id}
+          ></input>
           <input
             className="form-box"
             placeholder="Name"
