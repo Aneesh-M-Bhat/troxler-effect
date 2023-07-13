@@ -16,8 +16,8 @@ export default function History() {
   }, [data]);
 
   const deleteHandler = (index) => {
-    const filteredData = data.filter((_, i) => index !== i);
-    setData(filteredData);
+    const filteredData = [...data].reverse().filter((_, i) => index !== i);
+    setData(filteredData.reverse());
   };
 
   return (
@@ -33,12 +33,12 @@ export default function History() {
             <th>Color</th>
             <th>Brightness</th>
             <th>
-              <ExportData csvData={data} />
+              <ExportData csvData={[...data].reverse()} />
             </th>
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
+          {[...data].reverse().map((item, index) => (
             <tr>
               <td>{item.id}</td>
               <td>{item.name}</td>
