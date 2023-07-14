@@ -1,7 +1,7 @@
 import { Router, Route } from 'electron-router-dom';
 import './App.css';
-import History from './History';
 import Home from './Home';
+import Table from './Table';
 
 export default function App() {
   return (
@@ -9,7 +9,8 @@ export default function App() {
       main={
         <>
           <Route path="/" element={<Home />} />
-          <Route path="/history" element={<History />} />
+          <Route path="/history" element={<Table isEdit={false} />} />
+          <Route path="/edit" element={<Table isEdit={true} />} />
         </>
       }
     ></Router>

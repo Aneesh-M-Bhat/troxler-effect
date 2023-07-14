@@ -3,7 +3,6 @@ import Circle from './Circle';
 import Form from './Form';
 
 export default function Home() {
-  const [startTime, setStartTime]: any = useState(new Date());
   const [name, setName]: any = useState('');
   const [age, setAge]: any = useState('');
   const [gender, setGender]: any = useState('');
@@ -14,8 +13,6 @@ export default function Home() {
   return currentWindow == 1 ? (
     <Circle
       color={color}
-      setStartTime={setStartTime}
-      startTime={startTime}
       setColor={setColor}
       age={age}
       gender={gender}

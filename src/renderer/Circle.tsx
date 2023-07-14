@@ -1,16 +1,8 @@
 import { useEffect, useState } from 'react';
 import { borderColors3 } from './constants';
 
-export default function Circle({
-  setStartTime,
-  startTime,
-  color,
-  setColor,
-  age,
-  gender,
-  name,
-  id,
-}) {
+export default function Circle({ color, setColor, age, gender, name, id }) {
+  const [startTime, setStartTime]: any = useState(new Date());
   const [data, setData] = useState([]);
   const [toast, setToast] = useState(0);
   const [opacity, setOpacity] = useState(90);
@@ -35,7 +27,28 @@ export default function Circle({
     }
   }, [toast]);
 
-  const addData = (time) => {
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+
+  function formatDate(date) {
+    return (
+      [
+        padTo2Digits(date.getDate()),
+        padTo2Digits(date.getMonth() + 1),
+        date.getFullYear(),
+      ].join('/') +
+      ' ' +
+      [
+        padTo2Digits(date.getHours()),
+        padTo2Digits(date.getMinutes()),
+        padTo2Digits(date.getSeconds()),
+      ].join(':')
+    );
+  }
+
+  const addData = (stopTime) => {
+    let time = (stopTime.getTime() - startTime.getTime()) / 1000;
     let colorInWords;
     switch (color) {
       case '0':
@@ -51,12 +64,16 @@ export default function Circle({
         colorInWords = 'Blue';
         break;
     }
+    let formattedStartTime = formatDate(startTime);
+    let formattedStopTime = formatDate(stopTime);
     const newData = {
       id: id,
       name: name,
       age: age,
       gender: gender,
+      startTime: formattedStartTime,
       time: time + 's',
+      stopTime: formattedStopTime,
       color: colorInWords,
       brightness: opacity == 90 ? 'High' : 'Low',
     };
@@ -65,11 +82,11 @@ export default function Circle({
 
   document.addEventListener('keydown', function (event) {
     if (event.key === ',') {
-      setStartTime(new Date().getTime());
+      setStartTime(new Date());
       setToast(1);
     }
     if (event.key === '.') {
-      addData((new Date().getTime() - startTime) / 1000);
+      addData(new Date());
       setToast(2);
     }
     if (event.key === '1') {

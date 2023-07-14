@@ -11,7 +11,8 @@ export default function Form({
 }) {
   const submitHandler = (event) => {
     event.preventDefault();
-    if (name !== '' && age !== '' && gender != '') setCurrentWindow(1);
+    if (name !== '' && age !== '' && gender != '' && id != '')
+      setCurrentWindow(1);
   };
 
   return (
