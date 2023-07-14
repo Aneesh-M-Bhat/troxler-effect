@@ -16,6 +16,7 @@ export default function EditForm({
       id != '' &&
       startTime != '' &&
       time != '' &&
+      stopTime != '' &&
       color != '' &&
       brightness != ''
     ) {
@@ -28,6 +29,7 @@ export default function EditForm({
         time: time,
         gender: gender,
         color: color,
+        stopTime: stopTime,
       };
       const data = rdata
         .map((item, index) => (index == editIndex ? edittedData : item))
@@ -44,6 +46,7 @@ export default function EditForm({
   const [gender, setGender] = useState(editData.gender);
   const [startTime, setStartTime] = useState(editData.startTime);
   const [time, setTime] = useState(editData.time);
+  const [stopTime, setStopTime] = useState(editData.stopTime);
   const [color, setColor] = useState(editData.color);
   const [brightness, setBrightness] = useState(editData.brightness);
 
@@ -98,6 +101,13 @@ export default function EditForm({
             type="string"
             onChange={(event) => setTime(event.target.value)}
             value={time}
+          />
+          <input
+            className="form-box "
+            placeholder="Stop Time"
+            type="string"
+            onChange={(event) => setStopTime(event.target.value)}
+            value={stopTime}
           />
           <select
             className="form-box "
