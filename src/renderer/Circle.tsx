@@ -42,7 +42,7 @@ export default function Circle({ color, setColor, age, gender, name, id }) {
       [
         padTo2Digits(date.getHours()),
         padTo2Digits(date.getMinutes()),
-        padTo2Digits(date.getSeconds()),
+        // padTo2Digits(date.getSeconds()),
       ].join(':')
     );
   }
@@ -91,21 +91,31 @@ export default function Circle({ color, setColor, age, gender, name, id }) {
     }
     if (event.key === '1') {
       setColor('0');
+      if (opacity == 50) setOpacity(90);
+      if (opacity == 10) setOpacity(20);
     }
     if (event.key === '2') {
       setColor('1');
+      if (opacity == 50) setOpacity(90);
+      if (opacity == 10) setOpacity(20);
     }
     if (event.key === '3') {
       setColor('2');
+      if (opacity == 50) setOpacity(90);
+      if (opacity == 10) setOpacity(20);
     }
     if (event.key === '4') {
       setColor('3');
+      if (opacity == 90) setOpacity(50);
+      if (opacity == 20) setOpacity(10);
     }
     if (event.key === 'ArrowUp') {
-      setOpacity(90);
+      if (color == '3') setOpacity(50);
+      else setOpacity(90);
     }
     if (event.key === 'ArrowDown') {
-      setOpacity(20);
+      if (color == '3') setOpacity(10);
+      else setOpacity(20);
     }
   });
   return (
