@@ -40,9 +40,38 @@ export default function EditForm({
     }
   };
 
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+
+  const updateStopTime = () => {
+    let t = parseInt(time.substr(0, startTime.length - 1));
+    let sec = 0,
+      min = 0,
+      hr = 0;
+    sec = (t % 60) + parseInt(startTime.substr(startTime.length - 2, 2));
+    if (sec > 60) {
+      min += 1;
+      sec -= 60;
+    }
+    t = Math.floor(t / 60);
+    min = (t % 60) + parseInt(startTime.substr(startTime.length - 5, 2));
+    if (min > 60) {
+      hr += 1;
+      min -= 60;
+    }
+    t = Math.floor(t / 60);
+    hr = t + parseInt(startTime.substr(startTime.length - 8, 2));
+
+    console.log(hr, min, sec);
+    let newStopTime =
+      padTo2Digits(hr) + ':' + padTo2Digits(min) + ':' + padTo2Digits(sec);
+    setStopTime(stopTime.substr(0, 11) + newStopTime);
+  };
+
   const [id, setId] = useState(editData.id);
   const [name, setName] = useState(editData.name);
-  const [age, setAge] = useState(editData.name);
+  const [age, setAge] = useState(editData.age);
   const [gender, setGender] = useState(editData.gender);
   const [startTime, setStartTime] = useState(editData.startTime);
   const [time, setTime] = useState(editData.time);
@@ -99,16 +128,30 @@ export default function EditForm({
             className="form-box "
             placeholder="Time"
             type="string"
-            onChange={(event) => setTime(event.target.value)}
+            onChange={(event) => {
+              setTime(event.target.value);
+            }}
             value={time}
           />
-          <input
-            className="form-box "
-            placeholder="Stop Time"
-            type="string"
-            onChange={(event) => setStopTime(event.target.value)}
-            value={stopTime}
-          />
+          <div>
+            <input
+              className="form-box disabled-form-box"
+              placeholder="Stop Time"
+              type="string"
+              disabled
+              onChange={(event) => {
+                setStopTime(event.target.value);
+              }}
+              value={stopTime}
+            />
+            <button
+              className="form-box button-calculate"
+              type="button"
+              onClick={() => updateStopTime()}
+            >
+              Calculate
+            </button>
+          </div>
           <select
             className="form-box "
             onChange={(event) => setColor(event.target.value)}

@@ -42,6 +42,10 @@
   font-size: medium;
 }
 
+.disabled-form-box {
+  opacity: 50%;
+}
+
 .form-header {
   text-align: right;
   border-bottom: black 1px solid;
@@ -56,6 +60,11 @@
 
 .button-submit {
   background-color: #00c000;
+}
+
+.button-calculate {
+  background-color: blue;
+  color: #fff;
 }
 
 table {
